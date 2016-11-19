@@ -6,8 +6,8 @@ $(document).ready(function(){
     var config = {
       square: parentId,
       button: parentId + ' button',
-      circles: parentId = ' .circle',
-      time: 1,
+      circles: parentId + ' > .circle',
+      time: 0,
       times: 10
     }
 
@@ -24,7 +24,6 @@ $(document).ready(function(){
         setTimeout(function(){
           $(config.button).velocity({ opacity: 1 }, {duration: 100, easing: "linear"});
         }, 6000);
-
         $(config.circles).velocity({
           backgroundColor: "#20BF55",
           borderRadius: "50%"
@@ -33,36 +32,32 @@ $(document).ready(function(){
           easing: "linear"
         });
 
-        config.time = 1;
+        config.time = 0;
         down();
       });
     }
 
     var down = function(){
-      var cssSelector = config.circles + ":nth-of-type(" + config.time + ")"
-
-      if(config.time - 1 === config.times){
+      if(config.time === config.times){
         return 0;
       }else{
-        $(cssSelector).velocity({
+        $(config.circles).eq(config.time).velocity({
             backgroundColor: "#0C77F8",
             marginTop:'20px'
         }, {
             duration: 400,
             easing: "spring",
-
             complete: function(){
+              up()
               config.time += 1;
-              up(cssSelector)
               down();
             }
         });
-
       }
     }
 
-    var up = function(cssSelector) {
-      $(cssSelector).velocity({
+    var up = function() {
+      $(config.circles).eq(config.time).velocity({
           backgroundColor: "#20BF55",
           marginTop:'0px',
       }, {
@@ -85,8 +80,10 @@ $(document).ready(function(){
 
     var template = function(){
       $(config.square).append(
-        "<h2> SQUARES BRAH </h1>" +
-        "<button> CLICK ME BRAH </button>"
+        '<h2> SQUARES BRAH </h1>' +
+        '<div class="button-wrapper">' +
+          '<button> CLICK ME BRAH </button>' +
+        '</div>'
       );
     }
 

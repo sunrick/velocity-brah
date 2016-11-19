@@ -1,3 +1,7 @@
 body, button {
   font-family: 'Bungee Inline', cursive;
 }
+
+h1, h2, h3, h4, h5, h6, button, p {
+  text-align: center;
+}
