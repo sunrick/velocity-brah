@@ -1,0 +1,80 @@
+<!doctype html>
+<html>
+    <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <title>FUUUUN</title>
+      <style>
+        .circle {
+          border-radius: 50%;
+          background-color: #20BF55;
+          width: 100px;
+          height: 100px;
+          float: left;
+        }
+      </style>
+      <script
+        src="https://code.jquery.com/jquery-3.1.1.min.js"
+        integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+        crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/velocity/1.2.3/velocity.min.js"></script>
+    </head>
+    <body>
+      <script>
+        var times = 10;
+        for(var i=0; i < times; i++){
+          $('body').append('<div class="circle"></div>');
+        }
+
+        var time = 1;
+
+        function down() {
+          var cssSelector = ".circle:nth-of-type(" + time + ")"
+          if(time - 1 === times){
+            return 0;
+          }else{
+            $(cssSelector).velocity({
+                backgroundColor: "#0C77F8",
+                marginTop:'20px'
+            }, {
+                duration: 400,
+                easing: "spring",
+
+                complete: function(){
+                  time += 1;
+                  up(cssSelector)
+                  down();
+                }
+            });
+
+          }
+
+        }
+
+        function up(cssSelector) {
+          $(cssSelector).velocity({
+              backgroundColor: "#20BF55",
+              marginTop:'0px',
+          }, {
+              duration: 400,
+              easing: "easeInQuad",
+          }).velocity({
+            borderTopLeftRadius:'0px',
+            borderBottomLeftRadius:'0px',
+          }, {
+            duration: 400,
+            easing: "easeInQuad",
+          }).velocity({
+            borderTopRightRadius:'0px',
+            borderBottomRightRadius:'0px',
+          }, {
+            duration: 400,
+            easing: "easeInQuad",
+          });
+        }
+
+        down();
+
+      </script>
+    </body>
+</html>
