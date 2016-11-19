@@ -12,7 +12,7 @@
           height: 100px;
           float: left;
         }
-        a {
+        a, button {
           display:block;
           margin-bottom: 20px;
         }
@@ -25,61 +25,79 @@
     </head>
     <body>
       <h1> SQUARES BRAH </h1>
-        <a href="/velocity-brah"> home brah </a>
+      <a href="/velocity-brah"> home brah </a>
+      <button> CLICK ME BRAH </button>
       <script>
-        var times = 10;
-        for(var i=0; i < times; i++){
-          $('body').append('<div class="circle"></div>');
-        }
 
-        var time = 1;
+        $(document).ready(function(){
 
-        function down() {
-          var cssSelector = ".circle:nth-of-type(" + time + ")"
-          if(time - 1 === times){
-            return 0;
-          }else{
-            $(cssSelector).velocity({
-                backgroundColor: "#0C77F8",
-                marginTop:'20px'
-            }, {
-                duration: 400,
-                easing: "spring",
+          var times = 10;
+          var time = 1;
 
-                complete: function(){
-                  time += 1;
-                  up(cssSelector)
-                  down();
-                }
-            });
-
+          for(var i=0; i < times; i++){
+            $('body').append('<div class="circle"></div>');
           }
 
-        }
+          $('button').on('click', function(){
 
-        function up(cssSelector) {
-          $(cssSelector).velocity({
+            $('.circle').velocity({
               backgroundColor: "#20BF55",
-              marginTop:'0px',
-          }, {
+              borderRadius: "50%"
+            },{
+              duration: 400,
+              easing: "easeInOutBounce"
+            });
+
+            time = 1;
+            down();
+          });
+
+          function down() {
+            var cssSelector = ".circle:nth-of-type(" + time + ")"
+            if(time - 1 === times){
+              return 0;
+            }else{
+              $(cssSelector).velocity({
+                  backgroundColor: "#0C77F8",
+                  marginTop:'20px'
+              }, {
+                  duration: 400,
+                  easing: "spring",
+
+                  complete: function(){
+                    time += 1;
+                    up(cssSelector)
+                    down();
+                  }
+              });
+
+            }
+          }
+
+          function up(cssSelector) {
+            $(cssSelector).velocity({
+                backgroundColor: "#20BF55",
+                marginTop:'0px',
+            }, {
+                duration: 400,
+                easing: "easeInQuad",
+            }).velocity({
+              borderTopLeftRadius:'0px',
+              borderBottomLeftRadius:'0px',
+            }, {
               duration: 400,
               easing: "easeInQuad",
-          }).velocity({
-            borderTopLeftRadius:'0px',
-            borderBottomLeftRadius:'0px',
-          }, {
-            duration: 400,
-            easing: "easeInQuad",
-          }).velocity({
-            borderTopRightRadius:'0px',
-            borderBottomRightRadius:'0px',
-          }, {
-            duration: 400,
-            easing: "easeInQuad",
-          });
-        }
+            }).velocity({
+              borderTopRightRadius:'0px',
+              borderBottomRightRadius:'0px',
+            }, {
+              duration: 400,
+              easing: "easeInQuad",
+            });
+          }
+        });
 
-        down();
+
 
       </script>
     </body>
