@@ -40,12 +40,18 @@
 
           $('button').on('click', function(){
 
+            // hardcoding like a champ brah
+            $('button').velocity({ opacity: 0 }, {duration: 100, easing: "linear"});
+            setTimeout(function(){
+              $('button').velocity({ opacity: 1 }, {duration: 100, easing: "linear"});
+            }, 6000);
+
             $('.circle').velocity({
               backgroundColor: "#20BF55",
               borderRadius: "50%"
             },{
               duration: 400,
-              easing: "easeInOutBounce"
+              easing: "linear"
             });
 
             time = 1;
@@ -92,7 +98,7 @@
               borderBottomRightRadius:'0px',
             }, {
               duration: 400,
-              easing: "easeInQuad",
+              easing: "easeInQuad"
             });
           }
         });
