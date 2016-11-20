@@ -1,8 +1,10 @@
+#square {
+  overflow: auto;
+}
+
 #square .circle {
   border-radius: 50%;
   background-color: #20BF55;
-  width: 100px;
-  height: 100px;
   float: left;
 }
 #square .button-wrapper {

@@ -5,8 +5,10 @@ $(document).ready(function(){
 
     var config = {
       square: parentId,
+      squareWidth: function(){ return $(parentId).width(); },
       button: parentId + ' button',
       circles: parentId + ' > .circle',
+      circleWidth: function(){ return this.squareWidth() / this.times; },
       time: 0,
       times: 10
     }
@@ -14,6 +16,8 @@ $(document).ready(function(){
     var addElements = function(){
       for(var i=0; i < config.times; i++){
         $(config.square).append('<div class="circle"></div>');
+        $(config.circles).height(config.circleWidth())
+                         .width(config.circleWidth());
       }
     }
 
@@ -78,6 +82,13 @@ $(document).ready(function(){
       });
     }
 
+    var resize = function() {
+      $(window).resize(function(){
+        $(config.circles).height(config.circleWidth())
+                         .width(config.circleWidth())
+      });
+    }
+
     var template = function(){
       $(config.square).append(
         '<h2> SQUARES BRAH </h1>' +
@@ -91,6 +102,7 @@ $(document).ready(function(){
       template();
       addElements();
       buttonClick();
+      resize();
     }
 
     init()
