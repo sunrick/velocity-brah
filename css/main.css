@@ -62,6 +62,7 @@ button {
   padding: 1rem;
   border-radius: 5px;
   border: none;
+  cursor: pointer;
 }
 
 button:focus {
