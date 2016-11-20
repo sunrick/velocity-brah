@@ -2,23 +2,41 @@ $(document).ready(function(){
 
   var Square = (function () {
     var parentId = '#square';
+    var circleWrapper = parentId + ' .circle-wrapper'
 
     var config = {
       square: parentId,
-      squareWidth: function(){ return $(parentId).width(); },
+      circleWrapper: circleWrapper,
       button: parentId + ' button',
-      circles: parentId + ' > .circle',
-      circleWidth: function(){ return this.squareWidth() / this.times; },
+      circles: circleWrapper + ' > .circle',
+      squareWidth: function(){ return $(parentId).width(); },
+      circleWrapperWidth: function() { return this.squareWidth(); },
+      circleWidth: function(){ return this.circleWrapperWidth() / this.times; },
       time: 0,
       times: 10
     }
 
-    var addElements = function(){
+    var initalizeCircleWrapper = function() {
+      $(config.circleWrapper).height(config.circleWidth())
+    }
+
+    var addCircles = function(){
       for(var i=0; i < config.times; i++){
-        $(config.square).append('<div class="circle"></div>');
-        $(config.circles).height(config.circleWidth())
-                         .width(config.circleWidth());
+        $(config.circleWrapper).append('<div class="circle"></div>');
+        sizeCircles(i);
       }
+    }
+
+    var sizeCircles = function(i){
+      $(config.circles).eq(i).css({
+        width: config.times + "%",
+        top: 0
+      });
+      var width = $(config.circles).eq(i).width();
+      $(config.circles).eq(i).css({
+        height: width,
+        left: width * i
+      });
     }
 
     var buttonClick =  function(){
@@ -84,8 +102,9 @@ $(document).ready(function(){
 
     var resize = function() {
       $(window).resize(function(){
-        $(config.circles).height(config.circleWidth())
-                         .width(config.circleWidth())
+        for(var i=0; i < config.times; i++){
+          sizeCircles(i)
+        }
       });
     }
 
@@ -94,13 +113,15 @@ $(document).ready(function(){
         '<h2> SQUARES BRAH </h1>' +
         '<div class="button-wrapper">' +
           '<button> CLICK ME BRAH </button>' +
-        '</div>'
+        '</div>' +
+        '<div class="circle-wrapper"></div>'
       );
     }
 
     var init = function() {
       template();
-      addElements();
+      initalizeCircleWrapper();
+      addCircles();
       buttonClick();
       resize();
     }
