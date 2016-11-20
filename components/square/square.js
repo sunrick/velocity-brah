@@ -45,7 +45,8 @@ $(document).ready(function(){
 
     var buttonClick =  function(){
       $(config.button).on('click', function(){
-        $(config.button).velocity({ opacity: 0 }, {duration: 100, easing: "linear"});
+        $(config.button).prop('disabled', true);
+        $(config.button).text("DON'T CLICK ME BRAH");
         run()
       });
     }
@@ -91,6 +92,8 @@ $(document).ready(function(){
         complete: function(){
           if(time === config.times - 1){ // zero indexing brah
             $(config.button).velocity({ opacity: 1 }, {duration: 100, easing: "linear"});
+            $(config.button).prop('disabled', false);
+            $(config.button).text("CLICK ME BRAH");
           }
         }
       });
