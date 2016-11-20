@@ -24,22 +24,22 @@ $(document).ready(function(){
     }
 
     var addCircles = function(){
-      for(var i=0; i < config.items; i++){
+      for(var item=0; item < config.items; item++){
         $(config.circleWrapper).append('<div class="circle"></div>');
         $(config.circles).css({ backgroundColor: config.primaryColor })
-        sizeCircles(i);
+        sizeCircles(item);
       }
     }
 
-    var sizeCircles = function(i){
-      $(config.circles).eq(i).css({
+    var sizeCircles = function(item){
+      $(config.circles).eq(item).css({
         width: (100 / config.items) + "%",
         top: 0
       });
-      var width = $(config.circles).eq(i).width();
-      $(config.circles).eq(i).css({
+      var width = $(config.circles).eq(item).width();
+      $(config.circles).eq(item).css({
         height: width,
-        left: width * i
+        left: width * item
       });
     }
 
@@ -102,8 +102,8 @@ $(document).ready(function(){
 
     var resize = function() {
       $(window).resize(function(){
-        for(var i=0; i < config.items; i++){
-          sizeCircles(i)
+        for(var item=0; item < config.items; item++){
+          sizeCircles(item)
         }
       });
     }
