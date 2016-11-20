@@ -46,15 +46,7 @@ $(document).ready(function(){
     var buttonClick =  function(){
       $(config.button).on('click', function(){
         $(config.button).velocity({ opacity: 0 }, {duration: 100, easing: "linear"});
-        $(config.circles).velocity({
-          backgroundColor: config.primaryColor,
-          borderRadius: "50%"
-        },{
-          duration: config.animationDuration,
-          easing: "linear"
-        });
-        config.time = 0;
-        down();
+        run()
       });
     }
 
@@ -128,6 +120,18 @@ $(document).ready(function(){
       addCircles();
       buttonClick();
       resize();
+    }
+
+    var run = function() {
+      $(config.circles).velocity({
+        backgroundColor: config.primaryColor,
+        borderRadius: "50%"
+      },{
+        duration: config.animationDuration,
+        easing: "linear"
+      });
+      config.time = 0;
+      down();
     }
 
     init()
