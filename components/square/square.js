@@ -64,6 +64,7 @@ $(document).ready(function(){
           complete: function(){
             up(config.time);
             config.time += 1;
+            // DO YOU EVEN KNOW RECURSION BRAH?
             down();
           }
         });
