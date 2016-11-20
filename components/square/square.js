@@ -20,13 +20,13 @@ $(document).ready(function(){
     }
 
     var initalizeCircleWrapper = function() {
-      $(config.circleWrapper).height(config.circleWidth())
+      $(config.circleWrapper).height(config.circleWidth());
     }
 
     var addCircles = function(){
       for(var item=0; item < config.items; item++){
         $(config.circleWrapper).append('<div class="circle"></div>');
-        $(config.circles).css({ backgroundColor: config.primaryColor })
+        $(config.circles).css({ backgroundColor: config.primaryColor });
         sizeCircles(item);
       }
     }
@@ -109,7 +109,7 @@ $(document).ready(function(){
     var resize = function() {
       $(window).resize(function(){
         for(var item=0; item < config.items; item++){
-          sizeCircles(item)
+          sizeCircles(item);
         }
       });
     }
@@ -144,7 +144,7 @@ $(document).ready(function(){
       down();
     }
 
-    init()
+    init();
 
     return {}
 
