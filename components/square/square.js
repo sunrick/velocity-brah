@@ -53,7 +53,6 @@ $(document).ready(function(){
           duration: 400,
           easing: "linear"
         });
-
         config.time = 0;
         down();
       });
@@ -64,37 +63,37 @@ $(document).ready(function(){
         return 0;
       }else{
         $(config.circles).eq(config.time).velocity({
-            backgroundColor: "#0C77F8",
-            marginTop:'20px'
-        }, {
-            duration: 400,
-            easing: "spring",
-            complete: function(){
-              up()
-              config.time += 1;
-              down();
-            }
+          backgroundColor: "#0C77F8",
+          marginTop:'20px'
+        },{
+          duration: 400,
+          easing: "spring",
+          complete: function(){
+            up()
+            config.time += 1;
+            down();
+          }
         });
       }
     }
 
     var up = function() {
       $(config.circles).eq(config.time).velocity({
-          backgroundColor: "#20BF55",
-          marginTop:'0px',
-      }, {
-          duration: 400,
-          easing: "easeInQuad",
+        backgroundColor: "#20BF55",
+        marginTop:'0px',
+      },{
+        duration: 400,
+        easing: "easeInQuad",
       }).velocity({
         borderTopLeftRadius:'0px',
         borderBottomLeftRadius:'0px',
-      }, {
+      },{
         duration: 400,
         easing: "easeInQuad",
       }).velocity({
         borderTopRightRadius:'0px',
         borderBottomRightRadius:'0px',
-      }, {
+      },{
         duration: 400,
         easing: "easeInQuad"
       });
