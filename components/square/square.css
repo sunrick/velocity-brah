@@ -10,9 +10,4 @@
 #square .circle {
   position: absolute;
   border-radius: 50%;
-  background-color: #20BF55;
-}
-#square .button-wrapper {
-  text-align: center;
-  margin: 40px 0px;
 }

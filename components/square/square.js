@@ -9,6 +9,8 @@ $(document).ready(function(){
       circleWrapper: circleWrapper,
       button: parentId + ' button',
       circles: circleWrapper + ' > .circle',
+      primaryColor: '#0C77F8',
+      secondaryColor: '#e62249',
       squareWidth: function(){ return $(parentId).width(); },
       circleWrapperWidth: function() { return this.squareWidth(); },
       circleWidth: function(){ return this.circleWrapperWidth() / this.times; },
@@ -23,6 +25,7 @@ $(document).ready(function(){
     var addCircles = function(){
       for(var i=0; i < config.times; i++){
         $(config.circleWrapper).append('<div class="circle"></div>');
+        $(config.circles).css({ backgroundColor: config.primaryColor })
         sizeCircles(i);
       }
     }
@@ -43,11 +46,13 @@ $(document).ready(function(){
       $(config.button).on('click', function(){
         // hardcoding like a champ brah
         $(config.button).velocity({ opacity: 0 }, {duration: 100, easing: "linear"});
+
         setTimeout(function(){
           $(config.button).velocity({ opacity: 1 }, {duration: 100, easing: "linear"});
         }, 6000);
+
         $(config.circles).velocity({
-          backgroundColor: "#20BF55",
+          backgroundColor: config.primaryColor,
           borderRadius: "50%"
         },{
           duration: 400,
@@ -63,7 +68,7 @@ $(document).ready(function(){
         return 0;
       }else{
         $(config.circles).eq(config.time).velocity({
-          backgroundColor: "#0C77F8",
+          backgroundColor: config.secondaryColor,
           marginTop:'20px'
         },{
           duration: 400,
@@ -79,7 +84,7 @@ $(document).ready(function(){
 
     var up = function() {
       $(config.circles).eq(config.time).velocity({
-        backgroundColor: "#20BF55",
+        backgroundColor: config.primaryColor,
         marginTop:'0px',
       },{
         duration: 400,
@@ -109,9 +114,9 @@ $(document).ready(function(){
 
     var template = function(){
       $(config.square).append(
-        '<h2> SQUARES BRAH </h1>' +
+        '<h2 class="blue-back"> SQUARES BRAH </h1>' +
         '<div class="button-wrapper">' +
-          '<button> CLICK ME BRAH </button>' +
+          '<button class="blue-back"> CLICK ME BRAH </button>' +
         '</div>' +
         '<div class="circle-wrapper"></div>'
       );

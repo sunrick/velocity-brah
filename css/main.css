@@ -1,8 +1,69 @@
 body, button {
   font-family: 'Bungee Inline', cursive;
+  color: #0C77F8;
 }
 
 h1, h2, h3, h4, h5, h6, button, p {
   font-family: 'Bungee Inline', cursive;
   text-align: center;
+  padding: 1rem 0;
+  margin-top: 0;
+}
+
+.title {
+  margin-bottom: 0;
+  padding: 2rem 0rem 4rem 0;
+}
+
+.black-font {
+  color: #262835;
+}
+.blue-font {
+  color: #0C77F8;
+}
+.red-font {
+  color: #e62249;
+}
+.green-font {
+  color: #20BF55;
+}
+.purple-font {
+  color: #5438DC;
+}
+.black-back {
+  background-color: #262835;
+  color: #fff;
+}
+.blue-back {
+  background-color: #0C77F8;
+  color: #fff;
+}
+.red-back {
+  background-color: #e62249;
+  color: #fff;
+}
+.green-back {
+  background-color: #20BF55;
+  color: #fff;
+}
+.purple-back {
+  background-color: #5438DC;
+}
+
+
+/* BUTTON STYLING */
+
+.button-wrapper {
+  text-align: center;
+  margin: 2.5rem 0 3rem 0;
+}
+
+button {
+  padding: 1rem;
+  border-radius: 5px;
+  border: none;
+}
+
+button:focus {
+  outline: none;
 }
