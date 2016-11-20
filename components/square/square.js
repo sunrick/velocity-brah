@@ -2,7 +2,7 @@ $(document).ready(function(){
 
   var Square = (function () {
     var parentId = '#square';
-    var circleWrapper = parentId + ' .circle-wrapper'
+    var circleWrapper = parentId + ' .circle-wrapper';
 
     var config = {
       square: parentId,
@@ -11,6 +11,8 @@ $(document).ready(function(){
       circles: circleWrapper + ' > .circle',
       primaryColor: '#0C77F8',
       secondaryColor: '#e62249',
+      animationDuration: 400,
+      totalTime: function(){ return 6000 }, // need to add code brah
       squareWidth: function(){ return $(parentId).width(); },
       circleWrapperWidth: function() { return this.squareWidth(); },
       circleWidth: function(){ return this.circleWrapperWidth() / this.times; },
@@ -32,7 +34,7 @@ $(document).ready(function(){
 
     var sizeCircles = function(i){
       $(config.circles).eq(i).css({
-        width: config.times + "%",
+        width: (100 / config.times) + "%",
         top: 0
       });
       var width = $(config.circles).eq(i).width();
@@ -49,13 +51,13 @@ $(document).ready(function(){
 
         setTimeout(function(){
           $(config.button).velocity({ opacity: 1 }, {duration: 100, easing: "linear"});
-        }, 6000);
+        }, config.totalTime());
 
         $(config.circles).velocity({
           backgroundColor: config.primaryColor,
           borderRadius: "50%"
         },{
-          duration: 400,
+          duration: config.animationDuration,
           easing: "linear"
         });
         config.time = 0;
@@ -71,7 +73,7 @@ $(document).ready(function(){
           backgroundColor: config.secondaryColor,
           marginTop:'20px'
         },{
-          duration: 400,
+          duration: config.animationDuration,
           easing: "spring",
           complete: function(){
             up()
@@ -87,19 +89,19 @@ $(document).ready(function(){
         backgroundColor: config.primaryColor,
         marginTop:'0px',
       },{
-        duration: 400,
+        duration: config.animationDuration,
         easing: "easeInQuad",
       }).velocity({
         borderTopLeftRadius:'0px',
         borderBottomLeftRadius:'0px',
       },{
-        duration: 400,
+        duration: config.animationDuration,
         easing: "easeInQuad",
       }).velocity({
         borderTopRightRadius:'0px',
         borderBottomRightRadius:'0px',
       },{
-        duration: 400,
+        duration: config.animationDuration,
         easing: "easeInQuad"
       });
     }
