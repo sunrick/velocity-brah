@@ -11,12 +11,12 @@ $(document).ready(function(){
       circles: circleWrapper + ' > .circle',
       primaryColor: '#0C77F8',
       secondaryColor: '#e62249',
-      animationDuration: 400,
+      animationDuration: 200,
       squareWidth: function(){ return $(parentId).width(); },
       circleWrapperWidth: function() { return this.squareWidth(); },
       circleWidth: function(){ return this.circleWrapperWidth() / this.times; },
       time: 0,
-      times: 10
+      times: 20
     }
 
     var initalizeCircleWrapper = function() {
