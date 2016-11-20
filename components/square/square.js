@@ -14,9 +14,9 @@ $(document).ready(function(){
       animationDuration: 200,
       squareWidth: function(){ return $(parentId).width(); },
       circleWrapperWidth: function() { return this.squareWidth(); },
-      circleWidth: function(){ return this.circleWrapperWidth() / this.times; },
-      time: 0,
-      times: 20
+      circleWidth: function(){ return this.circleWrapperWidth() / this.items; },
+      currentItem: 0,
+      items: 20
     }
 
     var initalizeCircleWrapper = function() {
@@ -24,7 +24,7 @@ $(document).ready(function(){
     }
 
     var addCircles = function(){
-      for(var i=0; i < config.times; i++){
+      for(var i=0; i < config.items; i++){
         $(config.circleWrapper).append('<div class="circle"></div>');
         $(config.circles).css({ backgroundColor: config.primaryColor })
         sizeCircles(i);
@@ -33,7 +33,7 @@ $(document).ready(function(){
 
     var sizeCircles = function(i){
       $(config.circles).eq(i).css({
-        width: (100 / config.times) + "%",
+        width: (100 / config.items) + "%",
         top: 0
       });
       var width = $(config.circles).eq(i).width();
@@ -52,18 +52,18 @@ $(document).ready(function(){
     }
 
     var down = function(){
-      if(config.time === config.times){
+      if(config.currentItem === config.items){
         return 0;
       }else{
-        $(config.circles).eq(config.time).velocity({
+        $(config.circles).eq(config.currentItem).velocity({
           backgroundColor: config.secondaryColor,
           marginTop:'20px'
         },{
           duration: config.animationDuration,
           easing: "spring",
           complete: function(){
-            up(config.time);
-            config.time += 1;
+            up(config.currentItem);
+            config.currentItem += 1;
             // DO YOU EVEN KNOW RECURSION BRAH?
             down();
           }
@@ -71,8 +71,8 @@ $(document).ready(function(){
       }
     }
 
-    var up = function(time) {
-      $(config.circles).eq(time).velocity({
+    var up = function(item) {
+      $(config.circles).eq(item).velocity({
         backgroundColor: config.primaryColor,
         marginTop:'0px',
       },{
@@ -91,7 +91,7 @@ $(document).ready(function(){
         duration: config.animationDuration,
         easing: "easeInQuad",
         complete: function(){
-          if(time === config.times - 1){ // zero indexing brah
+          if(item === config.items - 1){ // zero indexing brah
             $(config.button).velocity({ opacity: 1 }, {duration: 100, easing: "linear"});
             $(config.button).prop('disabled', false);
             $(config.button).text("CLICK ME BRAH");
@@ -102,7 +102,7 @@ $(document).ready(function(){
 
     var resize = function() {
       $(window).resize(function(){
-        for(var i=0; i < config.times; i++){
+        for(var i=0; i < config.items; i++){
           sizeCircles(i)
         }
       });
@@ -134,7 +134,7 @@ $(document).ready(function(){
         duration: config.animationDuration,
         easing: "linear"
       });
-      config.time = 0;
+      config.currentItem = 0;
       down();
     }
 
