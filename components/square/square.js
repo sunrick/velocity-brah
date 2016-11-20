@@ -12,7 +12,6 @@ $(document).ready(function(){
       primaryColor: '#0C77F8',
       secondaryColor: '#e62249',
       animationDuration: 400,
-      totalTime: function(){ return 6000 }, // need to add code brah
       squareWidth: function(){ return $(parentId).width(); },
       circleWrapperWidth: function() { return this.squareWidth(); },
       circleWidth: function(){ return this.circleWrapperWidth() / this.times; },
@@ -46,13 +45,7 @@ $(document).ready(function(){
 
     var buttonClick =  function(){
       $(config.button).on('click', function(){
-        // hardcoding like a champ brah
         $(config.button).velocity({ opacity: 0 }, {duration: 100, easing: "linear"});
-
-        setTimeout(function(){
-          $(config.button).velocity({ opacity: 1 }, {duration: 100, easing: "linear"});
-        }, config.totalTime());
-
         $(config.circles).velocity({
           backgroundColor: config.primaryColor,
           borderRadius: "50%"
@@ -76,7 +69,7 @@ $(document).ready(function(){
           duration: config.animationDuration,
           easing: "spring",
           complete: function(){
-            up()
+            up(config.time);
             config.time += 1;
             down();
           }
@@ -84,8 +77,8 @@ $(document).ready(function(){
       }
     }
 
-    var up = function() {
-      $(config.circles).eq(config.time).velocity({
+    var up = function(time) {
+      $(config.circles).eq(time).velocity({
         backgroundColor: config.primaryColor,
         marginTop:'0px',
       },{
@@ -102,7 +95,12 @@ $(document).ready(function(){
         borderBottomRightRadius:'0px',
       },{
         duration: config.animationDuration,
-        easing: "easeInQuad"
+        easing: "easeInQuad",
+        complete: function(){
+          if(time === config.times - 1){ // zero indexing brah
+            $(config.button).velocity({ opacity: 1 }, {duration: 100, easing: "linear"});
+          }
+        }
       });
     }
 
