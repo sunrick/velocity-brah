@@ -43,12 +43,22 @@ $(document).ready(function(){
       });
     }
 
-    var buttonClick =  function(){
+    var buttonClick = function(){
       $(config.button).on('click', function(){
-        $(config.button).prop('disabled', true);
-        $(config.button).text("DON'T CLICK ME BRAH");
-        run()
+        disableButton();
+        run();
       });
+    }
+
+    var disableButton = function(){
+      $(config.button).prop('disabled', true);
+      $(config.button).text("DON'T CLICK ME BRAH");
+    }
+
+    var resetButton = function(){
+      $(config.button).velocity({ opacity: 1 }, {duration: 100, easing: "linear"});
+      $(config.button).prop('disabled', false);
+      $(config.button).text("CLICK ME BRAH");
     }
 
     var down = function(){
@@ -91,11 +101,7 @@ $(document).ready(function(){
         duration: config.animationDuration,
         easing: "easeInQuad",
         complete: function(){
-          if(item === config.items - 1){ // zero indexing brah
-            $(config.button).velocity({ opacity: 1 }, {duration: 100, easing: "linear"});
-            $(config.button).prop('disabled', false);
-            $(config.button).text("CLICK ME BRAH");
-          }
+          if(item === config.items - 1){ resetButton(); } // zero indexing brah
         }
       });
     }
