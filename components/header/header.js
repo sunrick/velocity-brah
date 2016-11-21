@@ -7,10 +7,13 @@ $(document).ready(function(){
       parent: parentId,
       child: parentId + " .line",
       parentWidth: function(){ return $(this.parent).width(); },
-      parentHeight: function() { return $(this.parent).height(); },
-      childWidth: function() { return $(this.child).width(); },
-      childHeight: function() { return $(this.child).height(); }
+      parentHeight: function(){ return $(this.parent).height(); },
+      childWidth: function(){ return $(this.child).width(); },
+      childHeight: function(){ return $(this.child).height(); },
+      speed: 0.2
     }
+
+    var duration = function(distance){ return Math.abs(distance) / config.speed; }
 
     var animation = function(){
       $(config.child).css({
@@ -24,25 +27,25 @@ $(document).ready(function(){
         left: function(){ return config.parentWidth() - config.childHeight(); }
       },{
         easing: "linear",
-        duration: 2000
+        duration: duration(config.parentWidth() - config.childHeight())
       })
       .velocity({
         top: function() { return config.parentHeight() - config.childHeight() }
       },{
         easing: "linear",
-        duration: 1000
+        duration: duration(config.parentHeight() - config.childHeight())
       })
       .velocity({
         left: 0
       },{
         easing: "linear",
-        duration: 2000
+        duration: duration(config.parentWidth() - config.childHeight())
       })
       .velocity({
         top: 0
       },{
         easing: "linear",
-        duration: 1000
+        duration: duration(config.parentHeight() - config.childHeight())
       })
     }
 
