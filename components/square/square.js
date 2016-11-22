@@ -17,7 +17,6 @@ class Square {
   // could have been written in constructor like this: this.parentWidth = () => { return $(this.parent).width(); }
   // advantage of this way is the lack of () when called. still is dynamic
   get parentWidth () { return $(this.parent).width(); }
-
   get wrapperWidth () { return $(this.wrapper).width(); }
   get childrenWidth () { return this.wrapperWidth / this.items; }
 
