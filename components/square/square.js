@@ -36,7 +36,7 @@ class Square {
     $(this.wrapper).height(this.childrenWidth);
   }
 
-  addCircles () {
+  addChildren () {
     for(let item=0; item < this.items; item++){
       $(this.wrapper).append('<div class="circle"></div>');
       $(this.children).css({ backgroundColor: this.primaryColor });
@@ -138,7 +138,7 @@ class Square {
   init () {
     this.template();
     this.setWrapperHeight();
-    this.addCircles();
+    this.addChildren();
     this.buttonClick();
     this.resize();
   }
