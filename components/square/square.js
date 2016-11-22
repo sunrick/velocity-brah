@@ -1,153 +1,167 @@
-$(document).ready(function(){
+"use strict";
 
-  var Square = (function () {
-    var parentId = '#square';
-    var circleWrapper = parentId + ' .circle-wrapper';
+class Square {
+  constructor(){
+    this.parent = '#square';
+    this.primaryColor = '#0C77F8';
+    this.secondaryColor = '#e62249';
+    this.animationDuration = 400;
+    this.items = 20;
+    this.currentItem = 0;
+  }
 
-    var config = {
-      square: parentId,
-      circleWrapper: circleWrapper,
-      button: parentId + ' button',
-      circles: circleWrapper + ' > .circle',
-      primaryColor: '#0C77F8',
-      secondaryColor: '#e62249',
-      animationDuration: 200,
-      squareWidth: function(){ return $(parentId).width(); },
-      circleWrapperWidth: function() { return this.squareWidth(); },
-      circleWidth: function(){ return this.circleWrapperWidth() / this.items; },
-      currentItem: 0,
-      items: 20
+  get wrapper () { return `${this.parent} .circle-wrapper`; }
+  get children () { return `${this.wrapper} > .circle`; }
+  get button () { return `${this.parent} button`; }
+
+  // could have been written in constructor like this: this.parentWidth = () => { return $(this.parent).width(); }
+  // advantage of this way is the lack of () when called. still is dynamic
+  get parentWidth () { return $(this.parent).width(); }
+
+  get wrapperWidth () { return $(this.wrapper).width(); }
+  get childrenWidth () { return this.wrapperWidth / this.items; }
+
+  template () {
+    $(this.parent).append(
+      `
+        <h2 class="blue-back"> SQUARES BRAH </h1>
+        <div class="button-wrapper">
+          <button class="blue-back"> CLICK ME BRAH </button>
+        </div>
+        <div class="circle-wrapper"></div>
+      `
+    );
+  }
+
+  setWrapperHeight () {
+    $(this.wrapper).height(this.childrenWidth);
+  }
+
+  addCircles () {
+    for(let item=0; item < this.items; item++){
+      $(this.wrapper).append('<div class="circle"></div>');
+      $(this.children).css({ backgroundColor: this.primaryColor });
+      this.sizeChildren(item);
     }
+  }
 
-    var initalizeCircleWrapper = function() {
-      $(config.circleWrapper).height(config.circleWidth());
-    }
+  sizeChildren (item) {
+    $(this.children).eq(item).css({
+      width: (100 / this.items) + "%",
+      top: 0
+    });
+    let width = $(this.children).eq(item).width();
+    $(this.children).eq(item).css({
+      height: width,
+      left: width * item
+    });
+  }
 
-    var addCircles = function(){
-      for(var item=0; item < config.items; item++){
-        $(config.circleWrapper).append('<div class="circle"></div>');
-        $(config.circles).css({ backgroundColor: config.primaryColor });
-        sizeCircles(item);
+  buttonClick () {
+    // need to figure this out, work around
+    let that = this;
+    $(this.button).on('click', function(){
+      that.disableButton();
+      that.run();
+    });
+  }
+
+  disableButton () {
+    $(this.button).prop('disabled', true);
+    $(this.button).text("DON'T CLICK ME BRAH");
+  }
+
+  enableButton () {
+    $(this.button).velocity({ opacity: 1 }, {duration: 100, easing: "linear"});
+    $(this.button).prop('disabled', false);
+    $(this.button).text("CLICK ME BRAH");
+  }
+
+  resize () {
+    // need to figure this out, work around
+    let that = this;
+    $(window).resize(function(){
+      for(let item=0; item < that.items; item++){
+        that.sizeChildren(item);
       }
-    }
+    });
+  }
 
-    var sizeCircles = function(item){
-      $(config.circles).eq(item).css({
-        width: (100 / config.items) + "%",
-        top: 0
-      });
-      var width = $(config.circles).eq(item).width();
-      $(config.circles).eq(item).css({
-        height: width,
-        left: width * item
-      });
-    }
-
-    var buttonClick = function(){
-      $(config.button).on('click', function(){
-        disableButton();
-        run();
-      });
-    }
-
-    var disableButton = function(){
-      $(config.button).prop('disabled', true);
-      $(config.button).text("DON'T CLICK ME BRAH");
-    }
-
-    var resetButton = function(){
-      $(config.button).velocity({ opacity: 1 }, {duration: 100, easing: "linear"});
-      $(config.button).prop('disabled', false);
-      $(config.button).text("CLICK ME BRAH");
-    }
-
-    var down = function(){
-      if(config.currentItem === config.items){
-        return 0;
-      }else{
-        $(config.circles).eq(config.currentItem).velocity({
-          backgroundColor: config.secondaryColor,
-          marginTop:'20px'
-        },{
-          duration: config.animationDuration,
-          easing: "spring",
-          complete: function(){
-            up(config.currentItem);
-            config.currentItem += 1;
-            // DO YOU EVEN KNOW RECURSION BRAH?
-            down();
-          }
-        });
-      }
-    }
-
-    var up = function(item) {
-      $(config.circles).eq(item).velocity({
-        backgroundColor: config.primaryColor,
-        marginTop:'0px',
+  down () {
+    // need to figure this out, work around
+    let that = this;
+    if(this.currentItem === this.items){
+      return 0;
+    }else{
+      $(this.children).eq(this.currentItem).velocity({
+        backgroundColor: that.secondaryColor,
+        marginTop:'20px'
       },{
-        duration: config.animationDuration,
-        easing: "easeInQuad",
-      }).velocity({
-        borderTopLeftRadius:'0px',
-        borderBottomLeftRadius:'0px',
-      },{
-        duration: config.animationDuration,
-        easing: "easeInQuad",
-      }).velocity({
-        borderTopRightRadius:'0px',
-        borderBottomRightRadius:'0px',
-      },{
-        duration: config.animationDuration,
-        easing: "easeInQuad",
+        duration: that.animationDuration,
+        easing: "spring",
         complete: function(){
-          if(item === config.items - 1){ resetButton(); } // zero indexing brah
+          that.up(that.currentItem);
+          that.currentItem += 1;
+          // DO YOU EVEN KNOW RECURSION BRAH?
+          that.down();
         }
       });
     }
+  }
 
-    var resize = function() {
-      $(window).resize(function(){
-        for(var item=0; item < config.items; item++){
-          sizeCircles(item);
-        }
-      });
-    }
+  up (item) {
+    // need to figure this out, work around
+    let that = this;
+    $(this.children).eq(item).velocity({
+      backgroundColor: that.primaryColor,
+      marginTop:'0px',
+    },{
+      duration: that.animationDuration,
+      easing: "easeInQuad",
+    }).velocity({
+      borderTopLeftRadius:'0px',
+      borderBottomLeftRadius:'0px',
+    },{
+      duration: that.animationDuration,
+      easing: "easeInQuad",
+    }).velocity({
+      borderTopRightRadius:'0px',
+      borderBottomRightRadius:'0px',
+    },{
+      duration: that.animationDuration,
+      easing: "easeInQuad",
+      complete: function(){
+        if(item === that.items - 1){ that.enableButton(); } // zero indexing brah
+      }
+    });
+  }
 
-    var template = function(){
-      $(config.square).append(
-        '<h2 class="blue-back"> SQUARES BRAH </h1>' +
-        '<div class="button-wrapper">' +
-          '<button class="blue-back"> CLICK ME BRAH </button>' +
-        '</div>' +
-        '<div class="circle-wrapper"></div>'
-      );
-    }
+  init () {
+    this.template();
+    this.setWrapperHeight();
+    this.addCircles();
+    this.buttonClick();
+    this.resize();
+  }
 
-    var init = function() {
-      template();
-      initalizeCircleWrapper();
-      addCircles();
-      buttonClick();
-      resize();
-    }
+  run () {
+    // need to figure this out, work around
+    let that = this;
+    $(this.circles).velocity({
+      backgroundColor: that.primaryColor,
+      borderRadius: "50%"
+    },{
+      duration: that.animationDuration,
+      easing: "linear"
+    });
+    this.currentItem = 0;
+    this.down();
+  }
 
-    var run = function() {
-      $(config.circles).velocity({
-        backgroundColor: config.primaryColor,
-        borderRadius: "50%"
-      },{
-        duration: config.animationDuration,
-        easing: "linear"
-      });
-      config.currentItem = 0;
-      down();
-    }
+}
 
-    init();
+// let square = new Square();
+// square.init();
 
-    return {}
-
-  } )();
-
-});
+// If we were using some kind of module loader this would work.
+// export { Square };
