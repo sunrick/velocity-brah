@@ -147,7 +147,7 @@ class Square {
   run () {
     // need to figure this out, work around
     let that = this;
-    $(this.circles).velocity({
+    $(this.children).velocity({
       backgroundColor: that.primaryColor,
       borderRadius: "50%"
     },{
