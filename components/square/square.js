@@ -1,6 +1,7 @@
 "use strict";
 
 class Square {
+
   constructor () {
     this.parent = '#square';
     this.primaryColor = '#0C77F8';
