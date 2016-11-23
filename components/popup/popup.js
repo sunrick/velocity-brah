@@ -25,7 +25,7 @@ class Popup {
 
   showChildren () {
     $(this.children).velocity({
-      scale: 1
+      scale: [1, 0] // forcefeeding prevents initial animation from working, http://velocityjs.org/#forcefeeding
     },{
       easing: [100, 10],
       duration: 400,
@@ -35,7 +35,7 @@ class Popup {
 
   hideChildren () {
     $(this.children).velocity({
-      scale: 0
+      scale: [0, 1] // forcefeeding prevents initial animation from working, http://velocityjs.org/#forcefeeding
     },{
       easing: [0.92,0.11,0.87,0.66],
       duration: 300,
@@ -46,12 +46,12 @@ class Popup {
   addChildren () {
     $(this.wrapper).append(
       `
-      <div class="popup"></div>
+      <div class="popup" style="display: none;"></div>
       `
     );
     $(this.children).css({
-      top: "-75px",
-      borderRadius: "50%"
+      top: "-50px",
+      borderRadius: "50%",
     });
   }
 
