@@ -1,0 +1,17 @@
+#popup {
+  text-align: center;
+
+}
+.wrapper {
+  position: relative;
+  display: inline-block;
+  margin: 4rem 0;
+}
+.popup{
+  height: 50px;
+  width: 50px;
+  background: green;
+  position: absolute;
+  z-index: 9999;
+  top: 0;
+}
