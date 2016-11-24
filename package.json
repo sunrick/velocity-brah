@@ -1,0 +1,26 @@
+{
+  "name": "velocity-fun",
+  "version": "1.0.0",
+  "description": "Just me messing around with javascript because I need to get better brah.",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sunrick/velocity-brah.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sunrick/velocity-brah/issues"
+  },
+  "homepage": "https://github.com/sunrick/velocity-brah#readme",
+  "devDependencies": {
+    "babel-core": "^6.18.2",
+    "babel-loader": "^6.2.8",
+    "babel-preset-latest": "^6.16.0",
+    "webpack": "^1.13.3"
+  }
+}
