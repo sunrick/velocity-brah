@@ -61,6 +61,9 @@ button, p {
   background-color: #5438DC;
 }
 
+.circle {
+  border-radius: 50%;
+}
 
 /* BUTTON STYLING */
 
