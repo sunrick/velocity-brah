@@ -1,6 +1,6 @@
 "use strict";
 
-class Square {
+export default class Square {
 
   constructor () {
     this.parent = '#square';
@@ -159,9 +159,3 @@ class Square {
   }
 
 }
-
-// let square = new Square();
-// square.init();
-
-// If we were using some kind of module loader this would work.
-// export { Square };

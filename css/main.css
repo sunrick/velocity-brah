@@ -1,5 +1,5 @@
-html, body, button {
-  font-family: 'Bungee Inline', cursive;
+html, body {
+  font-family: 'Bungee Inline', sans-serif;
   color: #0C77F8;
 }
 
@@ -8,11 +8,17 @@ html, body {
   text-shadow: 1px 1px 1px rgba(0,0,0,0.004);
 }
 
-h1, h2, h3, h4, h5, h6, button, p {
-  font-family: 'Bungee Inline', cursive;
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Bungee Inline', sans-serif;
   text-align: center;
   padding: 1rem 0;
   margin-top: 0;
+  font-weight: 400;
+}
+
+button, p {
+  font-family: 'Bungee Inline', sans-serif;
+  font-weight: 400;
 }
 
 .title {
