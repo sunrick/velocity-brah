@@ -317,13 +317,37 @@
 	  }, {
 	    key: "showChildren",
 	    value: function showChildren() {
-	      $(this.children).velocity({
-	        scale: [1, 0] // forcefeeding prevents initial animation from working, http://velocityjs.org/#forcefeeding
-	      }, {
-	        easing: [100, 10],
-	        duration: 400,
-	        display: 'block'
-	      });
+	      var _iteratorNormalCompletion = true;
+	      var _didIteratorError = false;
+	      var _iteratorError = undefined;
+
+	      try {
+	        for (var _iterator = this.childrenData[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+	          var child = _step.value;
+
+	          $("#" + this.idChild(child.id)).velocity({
+	            scale: [1, 0] // forcefeeding prevents initial animation from working, http://velocityjs.org/#forcefeeding
+	          }, {
+	            delay: child.delay,
+	            easing: [100, 10],
+	            duration: 400,
+	            display: 'block'
+	          });
+	        }
+	      } catch (err) {
+	        _didIteratorError = true;
+	        _iteratorError = err;
+	      } finally {
+	        try {
+	          if (!_iteratorNormalCompletion && _iterator.return) {
+	            _iterator.return();
+	          }
+	        } finally {
+	          if (_didIteratorError) {
+	            throw _iteratorError;
+	          }
+	        }
+	      }
 	    }
 	  }, {
 	    key: "hideChildren",
@@ -340,28 +364,28 @@
 	    key: "addChildren",
 	    value: function addChildren() {
 	      var self = this;
-	      var _iteratorNormalCompletion = true;
-	      var _didIteratorError = false;
-	      var _iteratorError = undefined;
+	      var _iteratorNormalCompletion2 = true;
+	      var _didIteratorError2 = false;
+	      var _iteratorError2 = undefined;
 
 	      try {
-	        for (var _iterator = self.childrenData[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-	          var child = _step.value;
+	        for (var _iterator2 = self.childrenData[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+	          var child = _step2.value;
 
 	          $(self.wrapper).append("\n        <div id=\"" + self.idChild(child.id) + "\" class=\"popup red-back\" style=\"display: none;\"></div>\n        ");
 	          $("#" + self.idChild(child.id)).css(Object.assign({ height: self.width, width: self.width }, child.attributes));
 	        }
 	      } catch (err) {
-	        _didIteratorError = true;
-	        _iteratorError = err;
+	        _didIteratorError2 = true;
+	        _iteratorError2 = err;
 	      } finally {
 	        try {
-	          if (!_iteratorNormalCompletion && _iterator.return) {
-	            _iterator.return();
+	          if (!_iteratorNormalCompletion2 && _iterator2.return) {
+	            _iterator2.return();
 	          }
 	        } finally {
-	          if (_didIteratorError) {
-	            throw _iteratorError;
+	          if (_didIteratorError2) {
+	            throw _iteratorError2;
 	          }
 	        }
 	      }
@@ -409,7 +433,42 @@
 	  }, {
 	    key: "childrenData",
 	    get: function get() {
-	      return [{ id: "left", attributes: { top: "50%", right: "auto", left: this.distancePx, bottom: "auto", marginTop: this.centerPx } }, { id: "top", attributes: { top: this.distancePx, right: "auto", left: "50%", bottom: "auto", marginLeft: this.centerPx } }, { id: "right", attributes: { top: "50%", right: this.distancePx, left: "auto", bottom: "auto", marginTop: this.centerPx } }, { id: "bottom", attributes: { top: "auto", right: "auto", left: "50%", bottom: this.distancePx, marginLeft: this.centerPx } }];
+	      return [{ id: "-top",
+	        attributes: {
+	          top: this.distancePx,
+	          right: "auto",
+	          left: "50%", bottom: "auto",
+	          marginLeft: this.centerPx
+	        },
+	        delay: 0
+	      }, { id: "-right",
+	        attributes: {
+	          top: "50%",
+	          right: this.distancePx,
+	          left: "auto",
+	          bottom: "auto",
+	          marginTop: this.centerPx
+	        },
+	        delay: 100
+	      }, { id: "-bottom",
+	        attributes: {
+	          top: "auto",
+	          right: "auto",
+	          left: "50%",
+	          bottom: this.distancePx,
+	          marginLeft: this.centerPx
+	        },
+	        delay: 200
+	      }, { id: "-left",
+	        attributes: {
+	          top: "50%",
+	          right: "auto",
+	          left: this.distancePx,
+	          bottom: "auto",
+	          marginTop: this.centerPx
+	        },
+	        delay: 300
+	      }];
 	    }
 	  }]);
 

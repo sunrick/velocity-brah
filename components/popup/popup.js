@@ -18,10 +18,45 @@ export default class Popup {
 
   get childrenData () {
     return [
-      { id: "left", attributes: { top: "50%", right: "auto", left: this.distancePx, bottom: "auto", marginTop: this.centerPx } },
-      { id: "top", attributes: { top: this.distancePx, right: "auto", left: "50%", bottom: "auto", marginLeft: this.centerPx } },
-      { id: "right", attributes: { top: "50%", right: this.distancePx, left: "auto", bottom: "auto", marginTop: this.centerPx } },
-      { id: "bottom", attributes: { top: "auto", right: "auto", left: "50%", bottom: this.distancePx, marginLeft: this.centerPx } }
+      { id: "-top",
+        attributes: {
+          top: this.distancePx,
+          right: "auto",
+          left: "50%", bottom: "auto",
+          marginLeft: this.centerPx
+        },
+        delay: 0
+      },
+      { id: "-right",
+        attributes: {
+          top: "50%",
+          right: this.distancePx,
+          left: "auto",
+          bottom: "auto",
+          marginTop: this.centerPx
+        },
+        delay: 50
+      },
+      { id: "-bottom",
+        attributes: {
+          top: "auto",
+          right: "auto",
+          left: "50%",
+          bottom: this.distancePx,
+          marginLeft: this.centerPx
+        },
+        delay: 50
+      },
+      { id: "-left",
+        attributes: {
+          top: "50%",
+          right: "auto",
+          left: this.distancePx,
+          bottom: "auto",
+          marginTop: this.centerPx
+        },
+        delay: 50
+      }
     ]
   }
 
@@ -42,13 +77,16 @@ export default class Popup {
   }
 
   showChildren () {
-    $(this.children).velocity({
-      scale: [1, 0] // forcefeeding prevents initial animation from working, http://velocityjs.org/#forcefeeding
-    },{
-      easing: [100, 10],
-      duration: 400,
-      display: 'block'
-    });
+    for(let child of this.childrenData){
+      $(`#${this.idChild(child.id)}`).velocity({
+        scale: [1, 0] // forcefeeding prevents initial animation from working, http://velocityjs.org/#forcefeeding
+      },{
+        delay: child.delay,
+        easing: [100, 10],
+        duration: 400,
+        display: 'block'
+      });
+    }
   }
 
   hideChildren () {
