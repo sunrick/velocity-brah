@@ -328,7 +328,7 @@
 	          $("#" + this.idChild(child.id)).velocity({
 	            scale: [1, 0] // forcefeeding prevents initial animation from working, http://velocityjs.org/#forcefeeding
 	          }, {
-	            delay: child.delay,
+	            delay: child.inDelay,
 	            easing: [100, 10],
 	            duration: 400,
 	            display: 'block'
@@ -352,28 +352,22 @@
 	  }, {
 	    key: "hideChildren",
 	    value: function hideChildren() {
-	      $(this.children).velocity({
-	        scale: [0, 1] // forcefeeding prevents initial animation from working, http://velocityjs.org/#forcefeeding
-	      }, {
-	        easing: [0.92, 0.11, 0.87, 0.66],
-	        duration: 300,
-	        display: 'none'
-	      });
-	    }
-	  }, {
-	    key: "addChildren",
-	    value: function addChildren() {
-	      var self = this;
 	      var _iteratorNormalCompletion2 = true;
 	      var _didIteratorError2 = false;
 	      var _iteratorError2 = undefined;
 
 	      try {
-	        for (var _iterator2 = self.childrenData[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+	        for (var _iterator2 = this.childrenData.reverse()[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
 	          var child = _step2.value;
 
-	          $(self.wrapper).append("\n        <div id=\"" + self.idChild(child.id) + "\" class=\"popup red-back\" style=\"display: none;\"></div>\n        ");
-	          $("#" + self.idChild(child.id)).css(Object.assign({ height: self.width, width: self.width }, child.attributes));
+	          $("#" + this.idChild(child.id)).velocity({
+	            scale: [0, 1] // forcefeeding prevents initial animation from working, http://velocityjs.org/#forcefeeding
+	          }, {
+	            delay: child.outDelay,
+	            easing: [0.92, 0.11, 0.87, 0.66],
+	            duration: 300,
+	            display: 'none'
+	          });
 	        }
 	      } catch (err) {
 	        _didIteratorError2 = true;
@@ -386,6 +380,36 @@
 	        } finally {
 	          if (_didIteratorError2) {
 	            throw _iteratorError2;
+	          }
+	        }
+	      }
+	    }
+	  }, {
+	    key: "addChildren",
+	    value: function addChildren() {
+	      var self = this;
+	      var _iteratorNormalCompletion3 = true;
+	      var _didIteratorError3 = false;
+	      var _iteratorError3 = undefined;
+
+	      try {
+	        for (var _iterator3 = self.childrenData[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
+	          var child = _step3.value;
+
+	          $(self.wrapper).append("\n        <div id=\"" + self.idChild(child.id) + "\" class=\"popup red-back\" style=\"display: none;\"></div>\n        ");
+	          $("#" + self.idChild(child.id)).css(Object.assign({ height: self.width, width: self.width }, child.attributes));
+	        }
+	      } catch (err) {
+	        _didIteratorError3 = true;
+	        _iteratorError3 = err;
+	      } finally {
+	        try {
+	          if (!_iteratorNormalCompletion3 && _iterator3.return) {
+	            _iterator3.return();
+	          }
+	        } finally {
+	          if (_didIteratorError3) {
+	            throw _iteratorError3;
 	          }
 	        }
 	      }
@@ -441,7 +465,8 @@
 	          bottom: "auto",
 	          marginLeft: this.centerPx
 	        },
-	        delay: 0
+	        inDelay: 0,
+	        outDelay: 300
 	      }, { id: "-right",
 	        attributes: {
 	          top: "50%",
@@ -450,7 +475,8 @@
 	          bottom: "auto",
 	          marginTop: this.centerPx
 	        },
-	        delay: 50
+	        inDelay: 50,
+	        outDelay: 200
 	      }, { id: "-bottom",
 	        attributes: {
 	          top: "auto",
@@ -459,7 +485,8 @@
 	          bottom: this.distancePx,
 	          marginLeft: this.centerPx
 	        },
-	        delay: 100
+	        inDelay: 100,
+	        outDelay: 100
 	      }, { id: "-left",
 	        attributes: {
 	          top: "50%",
@@ -468,7 +495,8 @@
 	          bottom: "auto",
 	          marginTop: this.centerPx
 	        },
-	        delay: 150
+	        inDelay: 150,
+	        outDelay: 0
 	      }];
 	    }
 	  }]);

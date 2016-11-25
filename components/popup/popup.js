@@ -26,7 +26,8 @@ export default class Popup {
           bottom: "auto",
           marginLeft: this.centerPx
         },
-        delay: 0
+        inDelay: 0,
+        outDelay: 300
       },
       { id: "-right",
         attributes: {
@@ -36,7 +37,8 @@ export default class Popup {
           bottom: "auto",
           marginTop: this.centerPx
         },
-        delay: 50
+        inDelay: 50,
+        outDelay: 200
       },
       { id: "-bottom",
         attributes: {
@@ -46,7 +48,8 @@ export default class Popup {
           bottom: this.distancePx,
           marginLeft: this.centerPx
         },
-        delay: 100
+        inDelay: 100,
+        outDelay: 100
       },
       { id: "-left",
         attributes: {
@@ -56,7 +59,8 @@ export default class Popup {
           bottom: "auto",
           marginTop: this.centerPx
         },
-        delay: 150
+        inDelay: 150,
+        outDelay: 0
       }
     ]
   }
@@ -82,7 +86,7 @@ export default class Popup {
       $(`#${this.idChild(child.id)}`).velocity({
         scale: [1, 0] // forcefeeding prevents initial animation from working, http://velocityjs.org/#forcefeeding
       },{
-        delay: child.delay,
+        delay: child.inDelay,
         easing: [100, 10],
         duration: 400,
         display: 'block'
@@ -91,13 +95,16 @@ export default class Popup {
   }
 
   hideChildren () {
-    $(this.children).velocity({
-      scale: [0, 1] // forcefeeding prevents initial animation from working, http://velocityjs.org/#forcefeeding
-    },{
-      easing: [0.92,0.11,0.87,0.66],
-      duration: 300,
-      display: 'none'
-    });
+    for(let child of this.childrenData.reverse()){
+      $(`#${this.idChild(child.id)}`).velocity({
+        scale: [0, 1] // forcefeeding prevents initial animation from working, http://velocityjs.org/#forcefeeding
+      },{
+        delay: child.outDelay,
+        easing: [0.92,0.11,0.87,0.66],
+        duration: 300,
+        display: 'none'
+      });
+    }
   }
 
   addChildren () {
