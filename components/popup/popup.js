@@ -46,7 +46,7 @@ export default class Popup {
   addChildren () {
     $(this.wrapper).append(
       `
-      <div class="popup" style="display: none;"></div>
+      <div class="popup red-back" style="display: none;"></div>
       `
     );
     $(this.children).css({

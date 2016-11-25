@@ -10,7 +10,6 @@
 .popup{
   height: 25px;
   width: 25px;
-  background: green;
   position: absolute;
   z-index: 9999;
   top: 0;

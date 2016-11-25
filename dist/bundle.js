@@ -332,7 +332,7 @@
 	  }, {
 	    key: "addChildren",
 	    value: function addChildren() {
-	      $(this.wrapper).append("\n      <div class=\"popup\" style=\"display: none;\"></div>\n      ");
+	      $(this.wrapper).append("\n      <div class=\"popup red-back\" style=\"display: none;\"></div>\n      ");
 	      $(this.children).css({
 	        top: "-50px",
 	        borderRadius: "50%"
