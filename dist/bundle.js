@@ -46,18 +46,21 @@
 
 	"use strict";
 
-	// If you were using some type of module loader this would work.
-
 	var _square = __webpack_require__(1);
 
 	var _square2 = _interopRequireDefault(_square);
 
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	var _popup = __webpack_require__(2);
 
-	console.log(_square2.default);
+	var _popup2 = _interopRequireDefault(_popup);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var square = new _square2.default();
 	square.init();
+
+	var popup = new _popup2.default();
+	popup.init();
 
 /***/ },
 /* 1 */
@@ -268,6 +271,106 @@
 	}();
 
 	exports.default = Square;
+
+/***/ },
+/* 2 */
+/***/ function(module, exports) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var Popup = function () {
+	  function Popup() {
+	    _classCallCheck(this, Popup);
+
+	    this.parent = "#popup";
+	    this.showing = false;
+	  }
+
+	  _createClass(Popup, [{
+	    key: "buttonClick",
+	    value: function buttonClick() {
+	      var self = this;
+	      $(this.button).on('click', function () {
+	        if (self.showing) {
+	          self.hideChildren();
+	        } else {
+	          self.showChildren();
+	        }
+	        self.showing = !self.showing; // can't be put outside of event handler
+	      });
+	    }
+	  }, {
+	    key: "showChildren",
+	    value: function showChildren() {
+	      $(this.children).velocity({
+	        scale: [1, 0] // forcefeeding prevents initial animation from working, http://velocityjs.org/#forcefeeding
+	      }, {
+	        easing: [100, 10],
+	        duration: 400,
+	        display: 'block'
+	      });
+	    }
+	  }, {
+	    key: "hideChildren",
+	    value: function hideChildren() {
+	      $(this.children).velocity({
+	        scale: [0, 1] // forcefeeding prevents initial animation from working, http://velocityjs.org/#forcefeeding
+	      }, {
+	        easing: [0.92, 0.11, 0.87, 0.66],
+	        duration: 300,
+	        display: 'none'
+	      });
+	    }
+	  }, {
+	    key: "addChildren",
+	    value: function addChildren() {
+	      $(this.wrapper).append("\n      <div class=\"popup\" style=\"display: none;\"></div>\n      ");
+	      $(this.children).css({
+	        top: "-50px",
+	        borderRadius: "50%"
+	      });
+	    }
+	  }, {
+	    key: "template",
+	    value: function template() {
+	      $(this.parent).append("\n      <h2 class=\"red-back\"> POPUP BRAH </h1>\n      <div class=\"wrapper\">\n        <button class=\"red-back\"> Click me brah </button>\n      </div>\n      ");
+	    }
+	  }, {
+	    key: "init",
+	    value: function init() {
+	      this.template();
+	      this.addChildren();
+	      this.buttonClick();
+	    }
+	  }, {
+	    key: "wrapper",
+	    get: function get() {
+	      return this.parent + " .wrapper";
+	    }
+	  }, {
+	    key: "children",
+	    get: function get() {
+	      return this.wrapper + " > .popup";
+	    }
+	  }, {
+	    key: "button",
+	    get: function get() {
+	      return this.parent + " button";
+	    }
+	  }]);
+
+	  return Popup;
+	}();
+
+	exports.default = Popup;
 
 /***/ }
 /******/ ]);

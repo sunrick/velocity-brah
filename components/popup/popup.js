@@ -1,6 +1,6 @@
 "use strict";
 
-class Popup {
+export default class Popup {
   constructor(){
     this.parent = "#popup";
     this.showing = false;
