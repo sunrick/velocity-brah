@@ -8,8 +8,6 @@
   margin: 4rem 0;
 }
 .popup{
-  height: 25px;
-  width: 25px;
   position: absolute;
   z-index: 9999;
   top: 0;

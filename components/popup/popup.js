@@ -4,17 +4,26 @@ export default class Popup {
   constructor(){
     this.parent = "#popup";
     this.showing = false;
-    this.childrenData = [
-      { id: 0, attributes: { top: "-50px", right: "auto", left: "-50px", bottom: "auto" } },
-      { id: 1, attributes: { top: "-50px", right: "auto", left: "0px", bottom: "auto" } },
-      { id: 2, attributes: { top: "-50px", right: "auto", left: "50px", bottom: "auto" } },
-      { id: 3, attributes: { top: "-50px", right: "auto", left: "100px", bottom: "auto" } }
-    ]
+    this.distance = -35;
+    this.width = 25;
   }
 
   get wrapper () { return `${this.parent} .wrapper`; }
   get children () { return `${this.wrapper} > .popup`; }
   get button () { return `${this.parent} button`; }
+
+  // centering helpers
+  get distancePx () { return `${this.distance}px`; }
+  get centerPx () { return `-${this.width/2}px`; }
+
+  get childrenData () {
+    return [
+      { id: "left", attributes: { top: "50%", right: "auto", left: this.distancePx, bottom: "auto", marginTop: this.centerPx } },
+      { id: "top", attributes: { top: this.distancePx, right: "auto", left: "50%", bottom: "auto", marginLeft: this.centerPx } },
+      { id: "right", attributes: { top: "50%", right: this.distancePx, left: "auto", bottom: "auto", marginTop: this.centerPx } },
+      { id: "bottom", attributes: { top: "auto", right: "auto", left: "50%", bottom: this.distancePx, marginLeft: this.centerPx } }
+    ]
+  }
 
   idChild (id) {
     return `${this.parent.substr(1)}${id}`
@@ -60,7 +69,7 @@ export default class Popup {
         <div id="${self.idChild(child.id)}" class="popup red-back" style="display: none;"></div>
         `
       );
-      $(`#${self.idChild(child.id)}`).css(child.attributes);
+      $(`#${self.idChild(child.id)}`).css(Object.assign({ height: self.width, width: self.width}, child.attributes));
     }
   }
 
@@ -69,7 +78,7 @@ export default class Popup {
       `
       <h2 class="red-back"> POPUP BRAH </h1>
       <div class="wrapper">
-        <button class="red-back"> Click me brah </button>
+        <button class="circle red-back"> </button>
       </div>
       `
     );

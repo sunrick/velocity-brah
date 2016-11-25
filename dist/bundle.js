@@ -292,7 +292,8 @@
 
 	    this.parent = "#popup";
 	    this.showing = false;
-	    this.childrenData = [{ id: 0, attributes: { top: "-50px", right: "auto", left: "-50px", bottom: "auto" } }, { id: 1, attributes: { top: "-50px", right: "auto", left: "0px", bottom: "auto" } }, { id: 2, attributes: { top: "-50px", right: "auto", left: "50px", bottom: "auto" } }, { id: 3, attributes: { top: "-50px", right: "auto", left: "100px", bottom: "auto" } }];
+	    this.distance = -35;
+	    this.width = 25;
 	  }
 
 	  _createClass(Popup, [{
@@ -348,7 +349,7 @@
 	          var child = _step.value;
 
 	          $(self.wrapper).append("\n        <div id=\"" + self.idChild(child.id) + "\" class=\"popup red-back\" style=\"display: none;\"></div>\n        ");
-	          $("#" + self.idChild(child.id)).css(child.attributes);
+	          $("#" + self.idChild(child.id)).css(Object.assign({ height: self.width, width: self.width }, child.attributes));
 	        }
 	      } catch (err) {
 	        _didIteratorError = true;
@@ -368,7 +369,7 @@
 	  }, {
 	    key: "template",
 	    value: function template() {
-	      $(this.parent).append("\n      <h2 class=\"red-back\"> POPUP BRAH </h1>\n      <div class=\"wrapper\">\n        <button class=\"red-back\"> Click me brah </button>\n      </div>\n      ");
+	      $(this.parent).append("\n      <h2 class=\"red-back\"> POPUP BRAH </h1>\n      <div class=\"wrapper\">\n        <button class=\"circle red-back\"> </button>\n      </div>\n      ");
 	    }
 	  }, {
 	    key: "init",
@@ -391,6 +392,24 @@
 	    key: "button",
 	    get: function get() {
 	      return this.parent + " button";
+	    }
+
+	    // centering helpers
+
+	  }, {
+	    key: "distancePx",
+	    get: function get() {
+	      return this.distance + "px";
+	    }
+	  }, {
+	    key: "centerPx",
+	    get: function get() {
+	      return "-" + this.width / 2 + "px";
+	    }
+	  }, {
+	    key: "childrenData",
+	    get: function get() {
+	      return [{ id: "left", attributes: { top: "50%", right: "auto", left: this.distancePx, bottom: "auto", marginTop: this.centerPx } }, { id: "top", attributes: { top: this.distancePx, right: "auto", left: "50%", bottom: "auto", marginLeft: this.centerPx } }, { id: "right", attributes: { top: "50%", right: this.distancePx, left: "auto", bottom: "auto", marginTop: this.centerPx } }, { id: "bottom", attributes: { top: "auto", right: "auto", left: "50%", bottom: this.distancePx, marginLeft: this.centerPx } }];
 	    }
 	  }]);
 
