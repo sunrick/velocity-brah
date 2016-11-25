@@ -369,7 +369,7 @@
 	  }, {
 	    key: "template",
 	    value: function template() {
-	      $(this.parent).append("\n      <h2 class=\"red-back\"> POPUP BRAH </h1>\n      <div class=\"wrapper\">\n        <button class=\"circle red-back\"> </button>\n      </div>\n      ");
+	      $(this.parent).append("\n      <h2 class=\"red-back\"> POPUP BRAH </h1>\n      <h3 class=\"red-font\"> Click the red circle brah </h3>\n      <div class=\"wrapper\">\n        <button class=\"circle red-back\"> </button>\n      </div>\n      ");
 	    }
 	  }, {
 	    key: "init",

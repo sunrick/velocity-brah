@@ -77,6 +77,7 @@ export default class Popup {
     $(this.parent).append(
       `
       <h2 class="red-back"> POPUP BRAH </h1>
+      <h3 class="red-font"> Click the red circle brah </h3>
       <div class="wrapper">
         <button class="circle red-back"> </button>
       </div>
