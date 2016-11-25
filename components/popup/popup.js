@@ -4,12 +4,21 @@ export default class Popup {
   constructor(){
     this.parent = "#popup";
     this.showing = false;
+    this.childrenData = [
+      { id: 0, attributes: { top: "-50px", right: "auto", left: "-50px", bottom: "auto" } },
+      { id: 1, attributes: { top: "-50px", right: "auto", left: "0px", bottom: "auto" } },
+      { id: 2, attributes: { top: "-50px", right: "auto", left: "50px", bottom: "auto" } },
+      { id: 3, attributes: { top: "-50px", right: "auto", left: "100px", bottom: "auto" } }
+    ]
   }
 
   get wrapper () { return `${this.parent} .wrapper`; }
   get children () { return `${this.wrapper} > .popup`; }
   get button () { return `${this.parent} button`; }
 
+  idChild (id) {
+    return `${this.parent.substr(1)}${id}`
+  }
 
   buttonClick () {
     let self = this;
@@ -44,15 +53,15 @@ export default class Popup {
   }
 
   addChildren () {
-    $(this.wrapper).append(
-      `
-      <div class="popup red-back" style="display: none;"></div>
-      `
-    );
-    $(this.children).css({
-      top: "-50px",
-      borderRadius: "50%",
-    });
+    let self = this;
+    for (let child of self.childrenData) {
+      $(self.wrapper).append(
+        `
+        <div id="${self.idChild(child.id)}" class="popup red-back" style="display: none;"></div>
+        `
+      );
+      $(`#${self.idChild(child.id)}`).css(child.attributes);
+    }
   }
 
   template () {

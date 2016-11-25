@@ -292,9 +292,15 @@
 
 	    this.parent = "#popup";
 	    this.showing = false;
+	    this.childrenData = [{ id: 0, attributes: { top: "-50px", right: "auto", left: "-50px", bottom: "auto" } }, { id: 1, attributes: { top: "-50px", right: "auto", left: "0px", bottom: "auto" } }, { id: 2, attributes: { top: "-50px", right: "auto", left: "50px", bottom: "auto" } }, { id: 3, attributes: { top: "-50px", right: "auto", left: "100px", bottom: "auto" } }];
 	  }
 
 	  _createClass(Popup, [{
+	    key: "idChild",
+	    value: function idChild(id) {
+	      return "" + this.parent.substr(1) + id;
+	    }
+	  }, {
 	    key: "buttonClick",
 	    value: function buttonClick() {
 	      var self = this;
@@ -332,11 +338,32 @@
 	  }, {
 	    key: "addChildren",
 	    value: function addChildren() {
-	      $(this.wrapper).append("\n      <div class=\"popup red-back\" style=\"display: none;\"></div>\n      ");
-	      $(this.children).css({
-	        top: "-50px",
-	        borderRadius: "50%"
-	      });
+	      var self = this;
+	      var _iteratorNormalCompletion = true;
+	      var _didIteratorError = false;
+	      var _iteratorError = undefined;
+
+	      try {
+	        for (var _iterator = self.childrenData[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+	          var child = _step.value;
+
+	          $(self.wrapper).append("\n        <div id=\"" + self.idChild(child.id) + "\" class=\"popup red-back\" style=\"display: none;\"></div>\n        ");
+	          $("#" + self.idChild(child.id)).css(child.attributes);
+	        }
+	      } catch (err) {
+	        _didIteratorError = true;
+	        _iteratorError = err;
+	      } finally {
+	        try {
+	          if (!_iteratorNormalCompletion && _iterator.return) {
+	            _iterator.return();
+	          }
+	        } finally {
+	          if (_didIteratorError) {
+	            throw _iteratorError;
+	          }
+	        }
+	      }
 	    }
 	  }, {
 	    key: "template",
