@@ -437,7 +437,8 @@
 	        attributes: {
 	          top: this.distancePx,
 	          right: "auto",
-	          left: "50%", bottom: "auto",
+	          left: "50%",
+	          bottom: "auto",
 	          marginLeft: this.centerPx
 	        },
 	        delay: 0
@@ -449,7 +450,7 @@
 	          bottom: "auto",
 	          marginTop: this.centerPx
 	        },
-	        delay: 100
+	        delay: 50
 	      }, { id: "-bottom",
 	        attributes: {
 	          top: "auto",
@@ -458,7 +459,7 @@
 	          bottom: this.distancePx,
 	          marginLeft: this.centerPx
 	        },
-	        delay: 200
+	        delay: 100
 	      }, { id: "-left",
 	        attributes: {
 	          top: "50%",
@@ -467,7 +468,7 @@
 	          bottom: "auto",
 	          marginTop: this.centerPx
 	        },
-	        delay: 300
+	        delay: 150
 	      }];
 	    }
 	  }]);

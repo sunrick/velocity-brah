@@ -22,7 +22,8 @@ export default class Popup {
         attributes: {
           top: this.distancePx,
           right: "auto",
-          left: "50%", bottom: "auto",
+          left: "50%",
+          bottom: "auto",
           marginLeft: this.centerPx
         },
         delay: 0
@@ -45,7 +46,7 @@ export default class Popup {
           bottom: this.distancePx,
           marginLeft: this.centerPx
         },
-        delay: 50
+        delay: 100
       },
       { id: "-left",
         attributes: {
@@ -55,7 +56,7 @@ export default class Popup {
           bottom: "auto",
           marginTop: this.centerPx
         },
-        delay: 50
+        delay: 150
       }
     ]
   }
