@@ -11,8 +11,8 @@ export default class Square {
     this.currentItem = 0;
   }
 
-  get wrapper () { return `${this.parent} .circle-wrapper`; }
-  get children () { return `${this.wrapper} > .circle`; }
+  get wrapper () { return `${this.parent} .wrapper`; }
+  get children () { return `${this.wrapper} .circle`; }
   get button () { return `${this.parent} button`; }
 
   // could have been written in constructor like this: this.parentWidth = () => { return $(this.parent).width(); }
@@ -24,11 +24,13 @@ export default class Square {
   template () {
     $(this.parent).append(
       `
-        <h2 class="blue-back"> SQUARES BRAH </h1>
-        <div class="button-wrapper">
-          <button class="blue-back"> CLICK ME BRAH </button>
+        <h2 class="blue-font"> SQUARES BRAH </h1>
+        <div class="content">
+          <div class="button-wrapper">
+            <button class="blue-back"> CLICK ME BRAH </button>
+          </div>
+          <div class="wrapper"></div>
         </div>
-        <div class="circle-wrapper"></div>
       `
     );
   }

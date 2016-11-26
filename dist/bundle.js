@@ -91,7 +91,7 @@
 	  _createClass(Square, [{
 	    key: 'template',
 	    value: function template() {
-	      $(this.parent).append('\n        <h2 class="blue-back"> SQUARES BRAH </h1>\n        <div class="button-wrapper">\n          <button class="blue-back"> CLICK ME BRAH </button>\n        </div>\n        <div class="circle-wrapper"></div>\n      ');
+	      $(this.parent).append('\n        <h2 class="blue-font"> SQUARES BRAH </h1>\n        <div class="content">\n          <div class="button-wrapper">\n            <button class="blue-back"> CLICK ME BRAH </button>\n          </div>\n          <div class="wrapper"></div>\n        </div>\n      ');
 	    }
 	  }, {
 	    key: 'setWrapperHeight',
@@ -234,12 +234,12 @@
 	  }, {
 	    key: 'wrapper',
 	    get: function get() {
-	      return this.parent + ' .circle-wrapper';
+	      return this.parent + ' .wrapper';
 	    }
 	  }, {
 	    key: 'children',
 	    get: function get() {
-	      return this.wrapper + ' > .circle';
+	      return this.wrapper + ' .circle';
 	    }
 	  }, {
 	    key: 'button',
@@ -417,7 +417,7 @@
 	  }, {
 	    key: "template",
 	    value: function template() {
-	      $(this.parent).append("\n      <h2 class=\"red-back\"> POPUP BRAH </h1>\n      <h3 class=\"red-font\"> Click the red circle brah </h3>\n      <div class=\"wrapper\">\n        <button class=\"circle red-back\"> </button>\n      </div>\n      ");
+	      $(this.parent).append("\n      <h2 class=\"red-font\"> POPUP BRAH </h1>\n      <div class=\"content\">\n        <h3 class=\"red-font\"> Click the red circle brah </h3>\n        <div class=\"wrapper\">\n          <button class=\"circle red-back\"> </button>\n        </div>\n      </div>\n      ");
 	    }
 	  }, {
 	    key: "init",

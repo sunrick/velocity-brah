@@ -1,6 +1,5 @@
-#square .circle-wrapper {
+#square .wrapper {
   position: relative;
-  padding: 40px 0px;
   width: 100%;
 }
 #square .circle {
