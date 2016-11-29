@@ -2,14 +2,26 @@
   text-align: center;
 
 }
-.wrapper {
+
+#popup .wrapper {
   position: relative;
   display: inline-block;
   margin: 3rem 0;
 }
-.popup{
+
+#popup .popup{
   position: absolute;
   z-index: 9999;
   top: 0;
   border-radius: 50%;
+}
+
+#popup button {
+  padding: 0;
+  width: 40px;
+  height: 40px;
+}
+
+#popup button i {
+  line-height: 2;
 }

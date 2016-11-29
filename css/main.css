@@ -46,6 +46,12 @@ button, p {
 .purple-font {
   color: #5438DC;
 }
+.pink-font {
+  color: #ED5F70;
+}
+.yellow-font {
+  color: #FFC65F;
+}
 .black-back {
   background-color: #262835;
   color: #fff;
@@ -64,10 +70,25 @@ button, p {
 }
 .purple-back {
   background-color: #5438DC;
+  color: #fff;
+}
+.pink-back {
+  background-color: #ED5F70;
+  color: #fff;
+}
+.yellow-back {
+  background-color: #FFC65F;
+  color: #fff;
 }
 
 .circle {
   border-radius: 50%;
+}
+
+i.override {
+  vertical-align: middle;
+  font-size:14px;
+  line-height: 1.8;
 }
 
 /* BUTTON STYLING */

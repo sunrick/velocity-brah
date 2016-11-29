@@ -27,7 +27,9 @@ export default class Popup {
           marginLeft: this.centerPx
         },
         inDelay: 0,
-        outDelay: 300
+        outDelay: 300,
+        icon: 'fa-bomb',
+        class: 'purple-back'
       },
       { id: "-right",
         attributes: {
@@ -38,7 +40,9 @@ export default class Popup {
           marginTop: this.centerPx
         },
         inDelay: 50,
-        outDelay: 200
+        outDelay: 200,
+        icon: 'fa-database',
+        class: 'blue-back'
       },
       { id: "-bottom",
         attributes: {
@@ -49,7 +53,9 @@ export default class Popup {
           marginLeft: this.centerPx
         },
         inDelay: 100,
-        outDelay: 100
+        outDelay: 100,
+        icon: 'fa-repeat',
+        class: 'green-back'
       },
       { id: "-left",
         attributes: {
@@ -60,7 +66,9 @@ export default class Popup {
           marginTop: this.centerPx
         },
         inDelay: 150,
-        outDelay: 0
+        outDelay: 0,
+        icon: 'fa-gbp',
+        class: 'yellow-back'
       }
     ]
   }
@@ -112,7 +120,9 @@ export default class Popup {
     for (let child of self.childrenData) {
       $(self.wrapper).append(
         `
-        <div id="${self.idChild(child.id)}" class="popup red-back" style="display: none;"></div>
+        <div id="${self.idChild(child.id)}" class="popup ${child.class}" style="display: none;">
+          <i class="fa ${child.icon} override"></i>
+        </div>
         `
       );
       $(`#${self.idChild(child.id)}`).css(Object.assign({ height: self.width, width: self.width}, child.attributes));
@@ -126,7 +136,7 @@ export default class Popup {
       <div class="content">
         <h3 class="red-font"> Click the red circle brah </h3>
         <div class="wrapper">
-          <button class="circle red-back"> </button>
+          <button class="circle red-back"><i class="fa fa-cog override"></i></button>
         </div>
       </div>
       `

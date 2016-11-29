@@ -396,7 +396,7 @@
 	        for (var _iterator3 = self.childrenData[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
 	          var child = _step3.value;
 
-	          $(self.wrapper).append("\n        <div id=\"" + self.idChild(child.id) + "\" class=\"popup red-back\" style=\"display: none;\"></div>\n        ");
+	          $(self.wrapper).append("\n        <div id=\"" + self.idChild(child.id) + "\" class=\"popup " + child.class + "\" style=\"display: none;\">\n          <i class=\"fa " + child.icon + " override\"></i>\n        </div>\n        ");
 	          $("#" + self.idChild(child.id)).css(Object.assign({ height: self.width, width: self.width }, child.attributes));
 	        }
 	      } catch (err) {
@@ -417,7 +417,7 @@
 	  }, {
 	    key: "template",
 	    value: function template() {
-	      $(this.parent).append("\n      <h2 class=\"red-font\"> POPUP BRAH </h1>\n      <div class=\"content\">\n        <h3 class=\"red-font\"> Click the red circle brah </h3>\n        <div class=\"wrapper\">\n          <button class=\"circle red-back\"> </button>\n        </div>\n      </div>\n      ");
+	      $(this.parent).append("\n      <h2 class=\"red-font\"> POPUP BRAH </h1>\n      <div class=\"content\">\n        <h3 class=\"red-font\"> Click the red circle brah </h3>\n        <div class=\"wrapper\">\n          <button class=\"circle red-back\"><i class=\"fa fa-cog override\"></i></button>\n        </div>\n      </div>\n      ");
 	    }
 	  }, {
 	    key: "init",
@@ -466,7 +466,9 @@
 	          marginLeft: this.centerPx
 	        },
 	        inDelay: 0,
-	        outDelay: 300
+	        outDelay: 300,
+	        icon: 'fa-bomb',
+	        class: 'purple-back'
 	      }, { id: "-right",
 	        attributes: {
 	          top: "50%",
@@ -476,7 +478,9 @@
 	          marginTop: this.centerPx
 	        },
 	        inDelay: 50,
-	        outDelay: 200
+	        outDelay: 200,
+	        icon: 'fa-database',
+	        class: 'blue-back'
 	      }, { id: "-bottom",
 	        attributes: {
 	          top: "auto",
@@ -486,7 +490,9 @@
 	          marginLeft: this.centerPx
 	        },
 	        inDelay: 100,
-	        outDelay: 100
+	        outDelay: 100,
+	        icon: 'fa-repeat',
+	        class: 'green-back'
 	      }, { id: "-left",
 	        attributes: {
 	          top: "50%",
@@ -496,7 +502,9 @@
 	          marginTop: this.centerPx
 	        },
 	        inDelay: 150,
-	        outDelay: 0
+	        outDelay: 0,
+	        icon: 'fa-gbp',
+	        class: 'yellow-back'
 	      }];
 	    }
 	  }]);
